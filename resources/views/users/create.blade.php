@@ -30,6 +30,7 @@
           </div>
 
           <button type="submit" class="btn btn-primary">Signup</button>
+          {{csrf_field()}}
       </form>
     </div>
   </div>
