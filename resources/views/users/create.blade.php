@@ -8,6 +8,7 @@
       <h5>Signup</h5>
     </div>
     <div class="card-body">
+      @include('shared._errors')
       <form method="POST" action="{{ route('users.store') }}">
           <div class="form-group">
             <label for="name">Name：</label>
