@@ -20,7 +20,8 @@ class SessionsController extends Controller
 
       if (Auth::attempt($credentials,$request->has('remember'))) {
         session()->flash('success','Welcome to back!');
-        return redirect()->route('users.show',[Auth::user()]);
+        $fallback = route('users.show', Auth::user());
+        return redirect()->intended($fallback);
       } else {
         session()->flash('danger','Your password is incorrect');
         return redirect()->back()->withInput();
