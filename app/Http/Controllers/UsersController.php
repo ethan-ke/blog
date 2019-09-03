@@ -70,7 +70,15 @@ class UsersController extends Controller
         'password' => bcrypt($request->password)
       ]);
 
-      session()->flush('success','Update completed!');
+      session()->flush('success','Successfully updated!');
       return redirect()->route('users.show',$user->id);
+    }
+
+    public function destroy(User $user)
+    {
+      $this->authorize('destroy',$user);
+      $user->delete();
+      session()->flash('success','Successfully deleted!');
+      return back();
     }
 }
