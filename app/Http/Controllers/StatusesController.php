@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Status;
 use Auth;
 
 class StatusesController extends Controller
@@ -20,6 +21,14 @@ class StatusesController extends Controller
 
       Auth::user()->statuses()->create(['content' => $request->content]);
       session()->flash('success','Successfully publish!');
+      return redirect()->back();
+    }
+
+    public function destroy(Status $status)
+    {
+      $this->authorize('destroy',$status);
+      $status->delete();
+      session()->flash('success', 'Deleted！');
       return redirect()->back();
     }
 }
