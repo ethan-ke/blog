@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Status;
+use App\Models\Article;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class StatusPolicy
+class ArticlePolicy
 {
     use HandlesAuthorization;
 
@@ -20,7 +20,7 @@ class StatusPolicy
         //
     }
 
-    public function destroy(User $user,Status $status)
+    public function own(User $user,Article $status)
     {
       return $user->id === $status->user_id;
     }

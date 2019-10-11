@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class Article extends Model
 {
-    protected $fillable = ['content'];
+    protected $fillable = ['content','title'];
     public function user()
     {
       return $this->belongsTo(User::class);

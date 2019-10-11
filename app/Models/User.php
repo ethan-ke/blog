@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
-use App\Models\Status;
+use App\Models\Article;
 
 class User extends Authenticatable
 {
@@ -54,16 +54,9 @@ class User extends Authenticatable
       return "http://www.gravatar.com/avatar/$hash?s=$size";
     }
 
-    public function statuses()
+    public function articles()
     {
-      return $this->hasMany(Status::class);
-    }
-
-    public function feed()
-    {
-      $user_ids = $this->followings->pluck('id')->toArray();
-      array_push($user_ids,$this->id);
-      return Status::whereIn('user_id',$user_ids)->with('user')->orderByDesc('created_at');
+      return $this->hasMany(Article::class);
     }
 
     public function followers()

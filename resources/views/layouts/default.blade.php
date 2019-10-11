@@ -3,17 +3,17 @@
   <head>
     <title>@yield('title','Blog')</title>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <meta name="csrf-token" content="{{ csrf_token()}}">
   </head>
-  <body>
+  <body id="app">
     @include('layouts._header')
     <div class="container">
-      <div class="offset-md-1 col-md-10">
         @include('shared._messages')
         @yield('content')
         @include('layouts._footer')
-      </div>
     </div>
-    <script type="text/javascript" src="{{mix('js/app.js')}}"></script>
   </body>
+  <script type="text/javascript" src="{{mix('js/app.js')}}"></script>
+  @yield('scriptAfterJs')
 </html>

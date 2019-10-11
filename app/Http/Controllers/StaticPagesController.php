@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
+use App\Models\User;
+use App\Models\Article;
 
 class StaticPagesController extends Controller
 {
     public function home()
     {
-      $feedItems = [];
-      if (Auth::check()) {
-        $feedItems = Auth::user()->feed()->paginate(30);
-      }
-    	return view('static_pages/home',compact('feedItems'));
+      $items = Article::orderByDesc('created_at');
+      $articles = $items->paginate(14);
+    	return view('static_pages/home',compact('articles'));
     }
 
     public function help()
